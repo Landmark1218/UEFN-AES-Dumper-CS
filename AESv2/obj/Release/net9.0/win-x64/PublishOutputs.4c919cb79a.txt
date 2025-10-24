@@ -1,0 +1,2 @@
+C:\Users\mr200\source\repos\AESv2\AESv2\bin\Release\net9.0\win-x64\publish\AESv2.pdb
+C:\Users\mr200\source\repos\AESv2\AESv2\bin\Release\net9.0\win-x64\publish\AESv2.exe

@@ -1,0 +1,142 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\mr200\\source\\repos\\AESv2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB310-DC66-4B7A-8AC1-894EDC06F1F7}|AESv2\\AESv2.csproj|c:\\users\\mr200\\source\\repos\\aesv2\\aesv2\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB310-DC66-4B7A-8AC1-894EDC06F1F7}|AESv2\\AESv2.csproj|solutionrelative:aesv2\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB310-DC66-4B7A-8AC1-894EDC06F1F7}|AESv2\\AESv2.csproj|c:\\users\\mr200\\source\\repos\\aesv2\\aesv2\\clipboardhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB310-DC66-4B7A-8AC1-894EDC06F1F7}|AESv2\\AESv2.csproj|solutionrelative:aesv2\\clipboardhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB310-DC66-4B7A-8AC1-894EDC06F1F7}|AESv2\\AESv2.csproj|c:\\users\\mr200\\source\\repos\\aesv2\\aesv2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB310-DC66-4B7A-8AC1-894EDC06F1F7}|AESv2\\AESv2.csproj|solutionrelative:aesv2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB310-DC66-4B7A-8AC1-894EDC06F1F7}|AESv2\\AESv2.csproj|c:\\users\\mr200\\source\\repos\\aesv2\\aesv2\\invalidtokenexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB310-DC66-4B7A-8AC1-894EDC06F1F7}|AESv2\\AESv2.csproj|solutionrelative:aesv2\\invalidtokenexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB310-DC66-4B7A-8AC1-894EDC06F1F7}|AESv2\\AESv2.csproj|c:\\users\\mr200\\source\\repos\\aesv2\\aesv2\\httpservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB310-DC66-4B7A-8AC1-894EDC06F1F7}|AESv2\\AESv2.csproj|solutionrelative:aesv2\\httpservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB310-DC66-4B7A-8AC1-894EDC06F1F7}|AESv2\\AESv2.csproj|c:\\users\\mr200\\source\\repos\\aesv2\\aesv2\\authdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB310-DC66-4B7A-8AC1-894EDC06F1F7}|AESv2\\AESv2.csproj|solutionrelative:aesv2\\authdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB310-DC66-4B7A-8AC1-894EDC06F1F7}|AESv2\\AESv2.csproj|c:\\users\\mr200\\source\\repos\\aesv2\\aesv2\\aesv2.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{EDDBB310-DC66-4B7A-8AC1-894EDC06F1F7}|AESv2\\AESv2.csproj|solutionrelative:aesv2\\aesv2.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AESv2",
+              "DocumentMoniker": "C:\\Users\\mr200\\source\\repos\\AESv2\\AESv2\\AESv2.csproj",
+              "RelativeDocumentMoniker": "AESv2\\AESv2.csproj",
+              "ToolTip": "C:\\Users\\mr200\\source\\repos\\AESv2\\AESv2\\AESv2.csproj",
+              "RelativeToolTip": "AESv2\\AESv2.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-23T09:07:10.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\mr200\\source\\repos\\AESv2\\AESv2\\AuthService.cs",
+              "RelativeDocumentMoniker": "AESv2\\AuthService.cs",
+              "ToolTip": "C:\\Users\\mr200\\source\\repos\\AESv2\\AESv2\\AuthService.cs",
+              "RelativeToolTip": "AESv2\\AuthService.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAIwJIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T06:04:13.286Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "HttpService.cs",
+              "DocumentMoniker": "C:\\Users\\mr200\\source\\repos\\AESv2\\AESv2\\HttpService.cs",
+              "RelativeDocumentMoniker": "AESv2\\HttpService.cs",
+              "ToolTip": "C:\\Users\\mr200\\source\\repos\\AESv2\\AESv2\\HttpService.cs",
+              "RelativeToolTip": "AESv2\\HttpService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T06:03:53.593Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ClipboardHelper.cs",
+              "DocumentMoniker": "C:\\Users\\mr200\\source\\repos\\AESv2\\AESv2\\ClipboardHelper.cs",
+              "RelativeDocumentMoniker": "AESv2\\ClipboardHelper.cs",
+              "ToolTip": "C:\\Users\\mr200\\source\\repos\\AESv2\\AESv2\\ClipboardHelper.cs",
+              "RelativeToolTip": "AESv2\\ClipboardHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T06:03:27.886Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "InvalidTokenException.cs",
+              "DocumentMoniker": "C:\\Users\\mr200\\source\\repos\\AESv2\\AESv2\\InvalidTokenException.cs",
+              "RelativeDocumentMoniker": "AESv2\\InvalidTokenException.cs",
+              "ToolTip": "C:\\Users\\mr200\\source\\repos\\AESv2\\AESv2\\InvalidTokenException.cs",
+              "RelativeToolTip": "AESv2\\InvalidTokenException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T06:03:06.715Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuthData.cs",
+              "DocumentMoniker": "C:\\Users\\mr200\\source\\repos\\AESv2\\AESv2\\AuthData.cs",
+              "RelativeDocumentMoniker": "AESv2\\AuthData.cs",
+              "ToolTip": "C:\\Users\\mr200\\source\\repos\\AESv2\\AESv2\\AuthData.cs",
+              "RelativeToolTip": "AESv2\\AuthData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T06:02:42.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\mr200\\source\\repos\\AESv2\\AESv2\\Program.cs",
+              "RelativeDocumentMoniker": "AESv2\\Program.cs",
+              "ToolTip": "C:\\Users\\mr200\\source\\repos\\AESv2\\AESv2\\Program.cs",
+              "RelativeToolTip": "AESv2\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFYAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T06:01:14.032Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

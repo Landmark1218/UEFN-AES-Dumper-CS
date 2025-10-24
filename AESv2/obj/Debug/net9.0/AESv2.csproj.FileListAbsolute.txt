@@ -1,0 +1,14 @@
+C:\Users\mr200\source\repos\AESv2\AESv2\bin\Debug\net9.0\AESv2.exe
+C:\Users\mr200\source\repos\AESv2\AESv2\bin\Debug\net9.0\AESv2.deps.json
+C:\Users\mr200\source\repos\AESv2\AESv2\bin\Debug\net9.0\AESv2.runtimeconfig.json
+C:\Users\mr200\source\repos\AESv2\AESv2\bin\Debug\net9.0\AESv2.dll
+C:\Users\mr200\source\repos\AESv2\AESv2\bin\Debug\net9.0\AESv2.pdb
+C:\Users\mr200\source\repos\AESv2\AESv2\obj\Debug\net9.0\AESv2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mr200\source\repos\AESv2\AESv2\obj\Debug\net9.0\AESv2.AssemblyInfoInputs.cache
+C:\Users\mr200\source\repos\AESv2\AESv2\obj\Debug\net9.0\AESv2.AssemblyInfo.cs
+C:\Users\mr200\source\repos\AESv2\AESv2\obj\Debug\net9.0\AESv2.csproj.CoreCompileInputs.cache
+C:\Users\mr200\source\repos\AESv2\AESv2\obj\Debug\net9.0\AESv2.dll
+C:\Users\mr200\source\repos\AESv2\AESv2\obj\Debug\net9.0\refint\AESv2.dll
+C:\Users\mr200\source\repos\AESv2\AESv2\obj\Debug\net9.0\AESv2.pdb
+C:\Users\mr200\source\repos\AESv2\AESv2\obj\Debug\net9.0\AESv2.genruntimeconfig.cache
+C:\Users\mr200\source\repos\AESv2\AESv2\obj\Debug\net9.0\ref\AESv2.dll
