@@ -9,15 +9,22 @@ using System.Threading.Tasks;
 
 public static class AuthService
 {
-    private const string ClientAuth = "Basic OThmN2U0MmMyZTNhNGY4NmE3NGViNDNmYmI0MWVkMzk6MGEyNDQ5YTItMDAxYS00NTFlLWFmZWMtM2U4MTI5MDFjNGQ3";
+   
+    public const string ClientAuth_Switch = "Basic NzlhOTMxYjM3NTMzNDU3MGFjMzY5MjM0ZjVkYTA1ZWM6ZWU3MzM1ZGYzYzRhNDEyY2I1NzA1NWFiN2FkZTY5M2U=";
+    public const string ClientAuth_PC = "Basic M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUxZWU5Y2IxMjIzNGY1MGE2OWVmYTY3ZWY1MzgxMmU=";
+    public const string ClientAuth_iOS = "Basic M2UxM2M1YzU3ZjU5NGE1NzhhYmU1MTZlZWNiNjczZmU6NTMwZTMxNmMzMzdlNDA5ODkzYzU1ZWM0NGYyMmNkNjI=";
 
-    private static readonly string DeviceAuthPath = Path.Combine(
+    private static readonly string ConfigDirectory = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "deviceAuth.json"
+        "FortniteMapTool"
     );
 
-    public static async Task<AuthData?> RefreshTokenAsync(AuthData savedAuth) //認証
+    private static readonly string DeviceAuthPath = Path.Combine(ConfigDirectory, "deviceAuth.json");
+    public static async Task<AuthData?> RefreshTokenAsync(AuthData savedAuth)
     {
+        if (string.IsNullOrEmpty(savedAuth.DeviceId) || string.IsNullOrEmpty(savedAuth.Secret))
+            return null;
+
         var bodyString = new FormUrlEncodedContent(new[]
         {
             new KeyValuePair<string, string>("grant_type", "device_auth"),
@@ -32,21 +39,23 @@ public static class AuthService
             Content = new StringContent(bodyString, Encoding.UTF8, "application/x-www-form-urlencoded")
         };
 
-        tokenReq.Headers.Add("Authorization", ClientAuth);
+        tokenReq.Headers.Add("Authorization", ClientAuth_PC);
 
         try
         {
-            // HttpService を利用します
             var tokenResponse = await HttpService.SendJsonAsync<JsonElement>(tokenReq);
 
-            savedAuth.AccessToken = tokenResponse.GetProperty("access_token").GetString() ?? savedAuth.AccessToken;
+            if (tokenResponse.TryGetProperty("access_token", out var accessToken))
+            {
+                savedAuth.AccessToken = accessToken.GetString() ?? savedAuth.AccessToken;
+            }
 
             return savedAuth;
         }
         catch (Exception ex)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Warning: デバイス認証の期限切れ、またはリフレッシュ失敗。再ログインします。({ex.Message})");
+            Console.WriteLine($"Warning: 認証リフレッシュ失敗。再ログインが必要です。({ex.Message})");
             Console.ResetColor();
             return null;
         }
@@ -54,11 +63,14 @@ public static class AuthService
 
     public static async Task<AuthData?> LoginAsync()
     {
+        if (!Directory.Exists(ConfigDirectory)) Directory.CreateDirectory(ConfigDirectory);
+
         var tokenReq = new HttpRequestMessage(HttpMethod.Post, "https://account-public-service-prod.ol.epicgames.com/account/api/oauth/token")
         {
             Content = new StringContent("grant_type=client_credentials", Encoding.UTF8, "application/x-www-form-urlencoded")
         };
-        tokenReq.Headers.Add("Authorization", ClientAuth);
+        tokenReq.Headers.Add("Authorization", ClientAuth_Switch);
+
         var tokenResponse = await HttpService.SendJsonAsync<JsonElement>(tokenReq);
         var accessToken = tokenResponse.GetProperty("access_token").ToString();
 
@@ -70,17 +82,20 @@ public static class AuthService
         var device = await HttpService.SendJsonAsync<JsonElement>(deviceReq);
 
         var url = device.GetProperty("verification_uri_complete").ToString();
-        Console.WriteLine($"リダイレクト先でログインしてください");
-        Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+        Console.WriteLine($"以下のURLでログインしてください:");
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine(url);
+        Console.ResetColor();
 
-        JsonElement token;
+        try { Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true }); } catch { }
+
+        JsonElement switchToken = default;
         var deadline = DateTimeOffset.UtcNow.AddSeconds(int.Parse(device.GetProperty("expires_in").ToString()));
         var interval = int.Parse(device.GetProperty("interval").ToString());
 
         while (DateTimeOffset.UtcNow < deadline)
         {
             await Task.Delay(interval * 1000);
-
             try
             {
                 var body = $"grant_type=device_code&device_code={device.GetProperty("device_code").ToString()}";
@@ -88,69 +103,63 @@ public static class AuthService
                 {
                     Content = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded")
                 };
-                req.Headers.Add("Authorization", ClientAuth);
-                token = await HttpService.SendJsonAsync<JsonElement>(req);
-
-                if (token.TryGetProperty("displayName", out var displayName))
-                {
-                    Console.Write("認証成功 ユーザーネーム: ");
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.Write(displayName.ToString());
-                    Console.ResetColor();
-                    Console.WriteLine();
-                }
-                else
-                    continue;
-
-                var accountId = token.GetProperty("account_id").ToString();
-                var authReq = new HttpRequestMessage(HttpMethod.Post, $"https://account-public-service-prod.ol.epicgames.com/account/api/public/account/{accountId}/deviceAuth");
-                authReq.Headers.Add("Authorization", $"Bearer {token.GetProperty("access_token").ToString()}");
-                var deviceAuth = await HttpService.SendJsonAsync<JsonElement>(authReq);
-
-                var authData = new AuthData
-                {
-                    DisplayName = displayName.ToString(),
-                    AccountId = accountId,
-                    DeviceId = deviceAuth.GetProperty("deviceId").ToString(),
-                    Secret = deviceAuth.GetProperty("secret").ToString(),
-                    AccessToken = token.GetProperty("access_token").ToString()
-                };
-
-                await File.WriteAllTextAsync(DeviceAuthPath, JsonSerializer.Serialize(authData, new JsonSerializerOptions { WriteIndented = true }));
-                return authData;
+                req.Headers.Add("Authorization", ClientAuth_Switch); // Switchクライアント
+                switchToken = await HttpService.SendJsonAsync<JsonElement>(req);
+                break;
             }
-            catch
-            {
-                // ignore
-            }
+            catch { continue; }
         }
 
-        throw new Exception("Login timed out.");
+        if (switchToken.ValueKind == JsonValueKind.Undefined) throw new Exception("Login timed out.");
+
+        string displayName = switchToken.GetProperty("displayName").ToString();
+        Console.WriteLine($"Logged in as: {displayName}");
+
+        var exchangeReq = new HttpRequestMessage(HttpMethod.Get, "https://account-public-service-prod.ol.epicgames.com/account/api/oauth/exchange");
+        exchangeReq.Headers.Add("Authorization", $"Bearer {switchToken.GetProperty("access_token")}");
+        var exchangeData = await HttpService.SendJsonAsync<JsonElement>(exchangeReq);
+        string exchangeCode = exchangeData.GetProperty("code").ToString();
+
+        var pcTokenReq = new HttpRequestMessage(HttpMethod.Post, "https://account-public-service-prod.ol.epicgames.com/account/api/oauth/token")
+        {
+            Content = new StringContent($"grant_type=exchange_code&exchange_code={exchangeCode}", Encoding.UTF8, "application/x-www-form-urlencoded")
+        };
+        pcTokenReq.Headers.Add("Authorization", ClientAuth_PC);
+        var pcToken = await HttpService.SendJsonAsync<JsonElement>(pcTokenReq);
+
+        string finalAccessToken = pcToken.GetProperty("access_token").ToString();
+        string accountId = pcToken.GetProperty("account_id").ToString();
+
+        var authReq = new HttpRequestMessage(HttpMethod.Post, $"https://account-public-service-prod.ol.epicgames.com/account/api/public/account/{accountId}/deviceAuth");
+        authReq.Headers.Add("Authorization", $"Bearer {finalAccessToken}");
+
+        var deviceAuth = await HttpService.SendJsonAsync<JsonElement>(authReq);
+
+        var authData = new AuthData
+        {
+            DisplayName = displayName,
+            AccountId = accountId,
+            DeviceId = deviceAuth.GetProperty("deviceId").ToString(),
+            Secret = deviceAuth.GetProperty("secret").ToString(),
+            AccessToken = finalAccessToken
+        };
+
+        var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
+        await File.WriteAllTextAsync(DeviceAuthPath, JsonSerializer.Serialize(authData, jsonOptions));
+
+        Console.WriteLine($"認証情報を保存しました: {DeviceAuthPath}");
+        return authData;
     }
 
-    //トークンリフレッシュ
     public static async Task<AuthData?> LoadDeviceAuthAsync()
     {
-        if (!File.Exists(DeviceAuthPath))
-            return null;
-
+        if (!File.Exists(DeviceAuthPath)) return null;
         try
         {
-            var json = await File.ReadAllTextAsync(DeviceAuthPath);
-            var authData = JsonSerializer.Deserialize<AuthData>(json);
-
-            if (authData == null)
-            {
-                Console.WriteLine("Invalid JSON, will re-login…");
-                return null;
-            }
-
+            var authData = JsonSerializer.Deserialize<AuthData>(await File.ReadAllTextAsync(DeviceAuthPath));
+            if (authData == null) return null;
             return await RefreshTokenAsync(authData);
         }
-        catch
-        {
-            Console.WriteLine("Invalid JSON, will re-login…");
-            return null;
-        }
+        catch { return null; }
     }
 }
