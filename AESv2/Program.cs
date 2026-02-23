@@ -103,6 +103,28 @@ class Program
                     ClipboardHelper.SetText(aesKey);
                     Console.WriteLine("AESキーをコピーしました");
 
+                    // Create KeyChain string: remove leading 0x, convert hex to bytes, Base64 encode,
+                    // then remove '-' from GUID and uppercase it, and output as "KeyChain <encodedAES>:<GUID>"
+                    try
+                    {
+                        var hex = aesKey.StartsWith("0x", StringComparison.OrdinalIgnoreCase) ? aesKey.Substring(2) : aesKey;
+                        if (hex.Length % 2 == 0)
+                        {
+                            var bytes = new byte[hex.Length / 2];
+                            for (int i = 0; i < bytes.Length; i++)
+                            {
+                                bytes[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
+                            }
+                            var encodedAes = Convert.ToBase64String(bytes);
+                            var modifiedGuid = guid.Replace("-", string.Empty).ToUpperInvariant();
+                            var keyChain = $"KeyChain: {modifiedGuid}:{encodedAes}";
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine(keyChain);
+                            Console.ResetColor();
+                        }
+                    }
+                    catch { }
+
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"GUID: {guid}");
                     Console.ResetColor();
